@@ -13,6 +13,7 @@ public class Customer {
 	private String lastName;
 	private String email;
 	private String phoneNumber;
+	private int cardNumber;
 	private String county;
 	private List<String> countyOptions;
 	
@@ -78,6 +79,16 @@ public class Customer {
 		this.phoneNumber = phoneNumber;
 	}
 	
+	
+	
+	public int getCardNumber() {
+		return cardNumber;
+	}
+
+	public void setCardNumber(int cardNumber) {
+		this.cardNumber = cardNumber;
+	}
+
 	public String getCounty() {
 		return county;
 	}

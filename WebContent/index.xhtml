@@ -68,6 +68,17 @@
 				</h:selectOneMenu>
 			<br/><br/> 
 			
+			Card Number: <h:inputText value="#{customer.cardNumber}" 
+								label="Credit Card number" 
+								id="card" 
+								required="false">
+							
+								<f:validateLength minimum="15" maximum="19" />	
+							</h:inputText>
+			
+			<h:message for="card" styleClass="error"/>
+			<br/><br/> 
+			
 			<h:commandButton value="Submit" action="customer_response" id="commandButton"/>
 			
 		</h:form>
