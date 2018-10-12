@@ -1,5 +1,13 @@
 package model;
 
+/**
+ * Class for Customer objects.
+ * Includes List of counties initialized in constructor.
+ * 
+ * @author Ivan
+ * @version 12-10-18
+ */
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +17,9 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class Customer {
 	
+	/**
+	 * Attributes
+	 */
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -17,7 +28,11 @@ public class Customer {
 	private String county;
 	private List<String> countyOptions;
 	
+	/**
+	 * Required No Parameter Constructor 
+	 */
 	public Customer() {
+		//initialize List | add counties for display in xhtml page
 		countyOptions = new ArrayList<>();
 		countyOptions.add("Carlow");
 		countyOptions.add("Cavan");
@@ -46,7 +61,10 @@ public class Customer {
 		countyOptions.add("Wexford");
 		countyOptions.add("Wicklow");
 	}
-
+	
+	/**
+	 * Getters/Setters
+	*/
 	public String getFirstName() {
 		return firstName;
 	}
@@ -78,8 +96,6 @@ public class Customer {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
-	
 	
 	public int getCardNumber() {
 		return cardNumber;
