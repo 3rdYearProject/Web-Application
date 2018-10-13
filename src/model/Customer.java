@@ -24,10 +24,23 @@ public class Customer {
 	private String lastName;
 	private String email;
 	private String phoneNumber;
-	private int cardNumber;
+	private String cardNumber;
 	private String county;
 	private List<String> countyOptions;
 	
+	
+	
+	public Customer(String firstName, String lastName, String email, String phoneNumber, String cardNumber,
+			String county) {
+		
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.cardNumber = cardNumber;
+		this.county = county;
+	}
+
 	/**
 	 * Required No Parameter Constructor 
 	 */
@@ -97,11 +110,11 @@ public class Customer {
 		this.phoneNumber = phoneNumber;
 	}
 	
-	public int getCardNumber() {
+	public String getCardNumber() {
 		return cardNumber;
 	}
 
-	public void setCardNumber(int cardNumber) {
+	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
 	}
 
