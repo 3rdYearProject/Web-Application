@@ -18,15 +18,6 @@ private List<Customer> Customers;
 		loadSampleData();
 	}
 	
-	/*
-	 * private String firstName;
-	private String lastName;
-	private String email;
-	private String phoneNumber;
-	private int cardNumber;
-	private String county;
-	 */
-	
 	public void loadSampleData() {
 		Customers = new ArrayList<>();
 		Customers.add(new Customer("Joe","Smith","js@gmail.com","089765345","xxxx-xxxx-xxxx-xxxx","Dublin"));
