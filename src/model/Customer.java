@@ -23,22 +23,21 @@ public class Customer {
 	private String firstName;
 	private String lastName;
 	private String email;
-	private String phoneNumber;
-	private String cardNumber;
+	private int phoneNumber;
+	private int cardNumber;
 	private String county;
 	private List<String> countyOptions;
 	
 	
 	
-	public Customer(String lastName,String firstName, String email, String phoneNumber, String cardNumber,
-			String county) {
+	public Customer(String lastName,String firstName, String email, int phoneNumber, int cardNumber) {
 		
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.cardNumber = cardNumber;
-		this.county = county;
+		
 	}
 
 	/**
@@ -102,19 +101,19 @@ public class Customer {
 		this.email = email;
 	}
 
-	public String getPhoneNumber() {
+	public int getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
+	public void setPhoneNumber(int phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	
-	public String getCardNumber() {
+	public int getCardNumber() {
 		return cardNumber;
 	}
 
-	public void setCardNumber(String cardNumber) {
+	public void setCardNumber(int cardNumber) {
 		this.cardNumber = cardNumber;
 	}
 

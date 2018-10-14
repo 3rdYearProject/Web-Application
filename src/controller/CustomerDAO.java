@@ -19,7 +19,7 @@ public class CustomerDAO {
 
 	private static CustomerDAO instance;
 	private DataSource dataSource;
-	private String jndiName = "java:comp/env/jdbc/ubertrial";
+	private String jndiName = "java:comp/env/jdbc/db1.cmccvmmkjrch.eu-west-1.rds.amazonaws.com";
 	
 	public static CustomerDAO getInstance() throws Exception {
 		if (instance == null) {
@@ -66,12 +66,12 @@ public class CustomerDAO {
 				String firstName = myRs.getString("LastName");
 				String lastName = myRs.getString("FirstName");
 				String email = myRs.getString("Email");
-				String phoneNumber = myRs.getString("Phone_Number");
-				String cardNumber = myRs.getString("Card_Number");
-				String county = myRs.getString("County");
+				int phoneNumber = myRs.getInt("Phone_Number");
+				int cardNumber = myRs.getInt("Card_Number");
+				//String county = myRs.getString("County");
 
 				// create new customer object
-				Customer tempCustomer = new Customer(lastName,firstName,email,phoneNumber,cardNumber,county);
+				Customer tempCustomer = new Customer(lastName,firstName,email,phoneNumber,cardNumber);
 
 				// add it to the list of customers
 				customers.add(tempCustomer);
