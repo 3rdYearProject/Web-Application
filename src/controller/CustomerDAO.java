@@ -52,7 +52,7 @@ public class CustomerDAO {
 		try {
 			myConn = getConnection();
 
-			String sql = "select * from customer order by last_name";
+			String sql = "select * from customer";
 
 			myStmt = myConn.createStatement();
 
@@ -71,7 +71,7 @@ public class CustomerDAO {
 				String county = myRs.getString("County");
 
 				// create new customer object
-				Customer tempCustomer = new Customer(firstName, lastName,email,phoneNumber,cardNumber,county);
+				Customer tempCustomer = new Customer(lastName,firstName,email,phoneNumber,cardNumber,county);
 
 				// add it to the list of customers
 				customers.add(tempCustomer);

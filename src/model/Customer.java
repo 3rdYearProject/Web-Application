@@ -30,7 +30,7 @@ public class Customer {
 	
 	
 	
-	public Customer(String firstName, String lastName, String email, String phoneNumber, String cardNumber,
+	public Customer(String lastName,String firstName, String email, String phoneNumber, String cardNumber,
 			String county) {
 		
 		this.firstName = firstName;
@@ -129,6 +129,14 @@ public class Customer {
 	public List<String> getCountyOptions() {
 		return countyOptions;
 	}
+
+	@Override
+	public String toString() {
+		return "Customer [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phoneNumber="
+				+ phoneNumber + ", cardNumber=" + cardNumber + ", county=" + county + "]";
+	}
+	
+	
 	
 	
 	
