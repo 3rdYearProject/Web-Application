@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+ xmlns:h="http://xmlns.jcp.org/jsf/html"
+ xmlns:f="http://xmlns.jcp.org/jsf/core">
+ 
+<h:head>
+	<title>Log In</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"/>
+	<style>
+		body{background-color:grey;
+		display:flex;
+		justify-content: center; 
+			 }
+		.frm{
+		margin-top:15%;
+		background-color:#66ff99;
+		padding:20px;
+		border-radius:10px;}
+		h1{
+		text-align:center;
+		padding-bottom:10px;}
+		
+		i{
+		padding-right:2px;}
+		
+	</style>
+</h:head>
+<h:body>
+ <h:panelGroup styleClass="frm" layout="block">
+	<h1>Log In</h1>
+ 
+<h:form id="myform">
+  
+    <h:messages globalOnly="true" style="color:red;margin:8px;" />
+  	<i class="fas fa-user"></i>
+    <h:outputText value="Username: "/>
+    <h:inputText label="Username" value="#{login.username}" /><br/><br/>
+    <i class="fas fa-lock"></i>
+    <h:outputText value="Password: "/>
+    <h:inputSecret value="#{login.password}" /><br/><br/>
+    <h:commandButton value="Login" action="#{login.login}" />
+</h:form>
+</h:panelGroup>
+
+</h:body>
+ 
+</html>
+ 
