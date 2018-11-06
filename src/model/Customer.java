@@ -25,12 +25,9 @@ public class Customer {
 	private String email;
 	private int phoneNumber;
 	private int cardNumber;
-	private String county;
-	private List<String> countyOptions;
 	
 	
-	
-	public Customer(String lastName,String firstName, String email, int phoneNumber, int cardNumber) {
+	public Customer(String firstName,String lastName, String email, int phoneNumber, int cardNumber) {
 		
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -44,34 +41,7 @@ public class Customer {
 	 * Required No Parameter Constructor 
 	 */
 	public Customer() {
-		//initialize List | add counties for display in xhtml page
-		countyOptions = new ArrayList<>();
-		countyOptions.add("Carlow");
-		countyOptions.add("Cavan");
-		countyOptions.add("Clare");
-		countyOptions.add("Cork");
-		countyOptions.add("Donegal");
-		countyOptions.add("Dublin");
-		countyOptions.add("Galway");
-		countyOptions.add("Kerry");
-		countyOptions.add("Kildare");
-		countyOptions.add("Kilkenny");
-		countyOptions.add("Laois");
-		countyOptions.add("Leitrim");
-		countyOptions.add("Limerick");
-		countyOptions.add("Longford");
-		countyOptions.add("Louth");
-		countyOptions.add("Mayo");
-		countyOptions.add("Meath");
-		countyOptions.add("Monaghan");
-		countyOptions.add("Offaly");
-		countyOptions.add("Roscommon");
-		countyOptions.add("Sligo");
-		countyOptions.add("Tipperary");
-		countyOptions.add("Waterford");
-		countyOptions.add("Westmeath");
-		countyOptions.add("Wexford");
-		countyOptions.add("Wicklow");
+		
 	}
 	
 	/**
@@ -117,22 +87,12 @@ public class Customer {
 		this.cardNumber = cardNumber;
 	}
 
-	public String getCounty() {
-		return county;
-	}
-
-	public void setCounty(String county) {
-		this.county = county;
-	}
 	
-	public List<String> getCountyOptions() {
-		return countyOptions;
-	}
 
 	@Override
 	public String toString() {
-		return "Customer [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phoneNumber="
-				+ phoneNumber + ", cardNumber=" + cardNumber + ", county=" + county + "]";
+		return "Customer firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phoneNumber="
+				+ phoneNumber + ", cardNumber=" + cardNumber;
 	}
 	
 	

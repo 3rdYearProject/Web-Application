@@ -26,7 +26,7 @@ public class Login {
 		if (this.username.equals(username) && this.password.equals(password)) {
 			context.getExternalContext().getSessionMap().put("user", username);
 			try {
-				context.getExternalContext().redirect("index.xhtml");
+				context.getExternalContext().redirect("customer_table.xhtml");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
