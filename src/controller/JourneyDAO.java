@@ -14,23 +14,26 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import model.Customer;
+import model.Journey;
 
-public class CustomerDAO {
 
-	private static CustomerDAO instance;
+
+
+public class JourneyDAO {
+
+	private static JourneyDAO instance;
 	private DataSource dataSource;
 	private String jndiName = "java:comp/env/jdbc/ubertrial";
 	
-	public static CustomerDAO getInstance() throws Exception {
+	public static JourneyDAO getInstance() throws Exception {
 		if (instance == null) {
-			instance = new CustomerDAO();
+			instance = new JourneyDAO();
 		}
 		
 		return instance;
 	}
 	
-	private CustomerDAO() throws Exception {		
+	private JourneyDAO() throws Exception {		
 		dataSource = getDataSource();
 	}
 
@@ -42,66 +45,70 @@ public class CustomerDAO {
 		return theDataSource;
 	}
 		
-	public List<Customer> getCustomers() throws Exception {
+	public List<Journey> getJourneys() throws Exception {
 		//List to hold returned DB data
-		List<Customer> customers = new ArrayList<>();
+		List<Journey> journeys = new ArrayList<>();
 		//connection,prepared statement,result set
 		Connection myConn = null;
-		PreparedStatement myPS = null;//TODO
+		PreparedStatement myPS = null;
 		ResultSet myPSRS = null;
 		
 		
 		try {
 			//establish connection to DB
 			myConn = getConnection();
-			//select all Customers
-			String sql = "select * from customer";
+			//select all Journeyss
+			String sql = "select * from journey";
 			//add auto-increment id to result set
 			myPS = myConn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			//get result set
 			myPSRS = myPS.executeQuery();
 			
 			// iterate over result set
-			while (myPSRS.next()) {//while (myRs.next())
-				
+			while (myPSRS.next()) {
+			
+				int journeyID = myPSRS.getInt("journey_id");
+				String carRegistration = myPSRS.getString("car_registration");
 				int customerID = myPSRS.getInt("customer_id");
-				String firstName = myPSRS.getString("FirstName");
-				String lastName = myPSRS.getString("LastName");
-				String email = myPSRS.getString("Email");
-				int phoneNumber = myPSRS.getInt("Phone_Number");
-				int cardNumber = myPSRS.getInt("Card_Number");
+				double elapsedDistance = myPSRS.getDouble("elapsed_distance");
+				double totalDistance = myPSRS.getDouble("total_distance");
+				double price = myPSRS.getDouble("price");
 				
-				// create new customer object
-				Customer tempCustomer = new Customer(customerID,firstName,lastName,email,phoneNumber,cardNumber);
+				// create new journey object
+				Journey tempJourney = new Journey(journeyID,carRegistration,customerID,elapsedDistance,totalDistance,price);
 				// add it to the list of customers
-				customers.add(tempCustomer);
+				journeys.add(tempJourney);
 			}
 			//return List generated from DB
-			return customers;		
+			return journeys;		
 		}
 		finally {
 			close (myConn, myPS, myPSRS);
 		}
 	}
-
 	
-	public void addCustomer(Customer c) throws Exception {
+	
+	
+	
+	
+	
+	public void addJourney(Journey j) throws Exception {
 
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
 
 		try {
 			myConn = getConnection();
-
-			String sql = "insert into customer (FirstName, LastName, Email, Phone_Number, Card_Number) values (?, ?, ?, ?, ?)";
+			
+			String sql = "insert into journey (car_registration, customer_id, elapsed_distance, total_distance, price) values (?, ?, ?, ?, ?)";
 
 			myStmt = myConn.prepareStatement(sql);
 
-			myStmt.setString(1, c.getFirstName());
-			myStmt.setString(2, c.getLastName());
-			myStmt.setString(3, c.getEmail());
-			myStmt.setInt(4, c.getPhoneNumber());
-			myStmt.setInt(5, c.getCardNumber());
+			myStmt.setString(1, j.getCarRegistration());
+			myStmt.setInt(2, j.getCustomerID());
+			myStmt.setDouble(3, j.getElapsedDistance());
+			myStmt.setDouble(4, j.getTotalDistance());
+			myStmt.setDouble(5, j.getPrice());
 			
 			myStmt.execute();			
 		}
@@ -112,12 +119,12 @@ public class CustomerDAO {
 	}
 	
 	/**
-	 * Method to find Customer via CustomerID
-	 * @param customerID ID of Customer
-	 * @return Customer
+	 * Method to find Journey via JourneyID
+	 * @param journeyID of Journey
+	 * @return Journey
 	 * @throws Exception
 	 */
-	public Customer getCustomer(int customerID) throws Exception {
+	public Journey getJourney(int journeyID) throws Exception {
 		
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
@@ -126,34 +133,36 @@ public class CustomerDAO {
 		try {
 			myConn = getConnection();
 
-			String sql = "select * from customer where customer_id=?";
+			String sql = "select * from journey where journey_id=?";
 
 			myStmt = myConn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			
 			// set params
-			myStmt.setInt(1, customerID);
+			myStmt.setInt(1, journeyID);
 			
 			myRs = myStmt.executeQuery();
 
-			Customer customer = null;
+			Journey journey = null;
 			
 			// retrieve data from result set row
 			if (myRs.next()) {
-				int id = myRs.getInt("customer_id");
-				String firstName = myRs.getString("FirstName");
-				String lastName = myRs.getString("LastName");
-				String email = myRs.getString("Email");
-				int phoneNumber = myRs.getInt("Phone_Number");
-				int cardNumber = myRs.getInt("Card_Number");
-
-				customer = new Customer(id, firstName, lastName,
-						email,phoneNumber,cardNumber);
+				
+				int id = myRs.getInt("journey_id");
+				String carRegistration = myRs.getString("car_registration");
+				int customerID = myRs.getInt("customer_id");
+				double elapsedDistance = myRs.getDouble("elapsed_distance");
+				double totalDistance = myRs.getDouble("total_distance");
+				double price = myRs.getDouble("price");
+			
+				
+				journey = new Journey(id,carRegistration,customerID,elapsedDistance,totalDistance,price);
+				
 			}
 			else {
-				throw new Exception("Could not find customer id: " + customerID);
+				throw new Exception("Could not find journey id: " + journeyID);
 			}
 
-			return customer;
+			return journey;
 		}
 		finally {
 			close (myConn, myStmt, myRs);
@@ -162,27 +171,26 @@ public class CustomerDAO {
 	
 	
 	
-	public void updateCustomer(Customer customer) throws Exception {
+	public void updateJourney(Journey journey) throws Exception {
 
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
 
 		try {
 			myConn = getConnection();
-
-			String sql = "update customer "
-						+ " set FirstName=?, LastName=?, Email=?, Phone_Number=?, Card_Number=?"
-						+ " where customer_id=?";
+			String sql = "update journey "
+						+ " set car_registration=?, customer_id=?, elapsed_distance=?, total_distance=?, price=?"
+						+ " where journey_id=?";
 
 			myStmt = myConn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 
 			// set params
-			myStmt.setString(1, customer.getFirstName());
-			myStmt.setString(2, customer.getLastName());
-			myStmt.setString(3, customer.getEmail());
-			myStmt.setInt(4, customer.getPhoneNumber());
-			myStmt.setInt(5, customer.getCardNumber());
-			myStmt.setInt(6, customer.getCustomerID());
+			myStmt.setString(1, journey.getCarRegistration());
+			myStmt.setInt(2, journey.getCustomerID());
+			myStmt.setDouble(3, journey.getElapsedDistance());
+			myStmt.setDouble(4, journey.getTotalDistance());
+			myStmt.setDouble(5, journey.getPrice());
+			myStmt.setInt(6, journey.getJourneyID());
 			
 			myStmt.execute();
 		}
@@ -193,11 +201,11 @@ public class CustomerDAO {
 	}
 	
 	/**
-	 * Method to delete Customer from DB via customer id
-	 * @param customerID id of customer to delete
+	 * Method to delete Journey from DB via journey id
+	 * @param journeyID id of journey to delete
 	 * @throws Exception
 	 */
-	public void deleteCustomer(int customerID) throws Exception {
+	public void deleteJourney(int journeyID) throws Exception {
 
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
@@ -205,12 +213,12 @@ public class CustomerDAO {
 		try {
 			myConn = getConnection();
 
-			String sql = "delete from customer where customer_id=?";
+			String sql = "delete from journey where journey_id=?";
 
 			myStmt = myConn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 
 			// set params
-			myStmt.setInt(1, customerID);
+			myStmt.setInt(1, journeyID);
 			
 			myStmt.execute();
 		}
@@ -220,11 +228,9 @@ public class CustomerDAO {
 	}
 	
 	
-	
-	
-	
-	
-	
+	/**
+	 * Helper classes for Database interactions
+	 */
 	private Connection getConnection() throws Exception {
 
 		Connection theConn = dataSource.getConnection();
@@ -255,5 +261,9 @@ public class CustomerDAO {
 			exc.printStackTrace();
 		}
 	}	
+	
+	
+	
+	
+	
 }
-

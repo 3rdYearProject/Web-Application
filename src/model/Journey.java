@@ -15,9 +15,9 @@ public class Journey {
 	/**
 	 * Attributes
 	 */
-	private String journeyID;
-	private Car car;
-	private Customer customer;
+	private int journeyID;
+	private String carRegistration;
+	private int customerID;
 	private double elapsedDistance;
 	private double totalDistance;
 	private double price;
@@ -25,11 +25,11 @@ public class Journey {
 	/**
 	 * Constructor with ID
 	 */
-	public Journey(String journeyID, Car car, Customer customer, double elapsedDistance, double totalDistance,
+	public Journey(int journeyID, String carRegistration, int customerID, double elapsedDistance, double totalDistance,
 			double price) {
 		this.journeyID = journeyID;
-		this.car = car;
-		this.customer = customer;
+		this.carRegistration = carRegistration;
+		this.customerID = customerID;
 		this.elapsedDistance = elapsedDistance;
 		this.totalDistance = totalDistance;
 		this.price = price;
@@ -38,10 +38,10 @@ public class Journey {
 	/**
 	 * Constructor without ID to operate with AutoIncrement SQL ID
 	 */
-	public Journey(Car car, Customer customer, double elapsedDistance, double totalDistance,
+	public Journey(String carRegistration, int customerID, double elapsedDistance, double totalDistance,
 			double price) {
-		this.car = car;
-		this.customer = customer;
+		this.carRegistration = carRegistration;
+		this.customerID = customerID;
 		this.elapsedDistance = elapsedDistance;
 		this.totalDistance = totalDistance;
 		this.price = price;
@@ -59,28 +59,28 @@ public class Journey {
 	/**
 	 * Getters/Setters
 	*/
-	public String getJourneyID() {
+	public int getJourneyID() {
 		return journeyID;
 	}
 
-	public void setJourneyID(String journeyID) {
+	public void setJourneyID(int journeyID) {
 		this.journeyID = journeyID;
 	}
 
-	public Car getCar() {
-		return car;
+	public String getCarRegistration() {
+		return carRegistration;
 	}
 
-	public void setCar(Car car) {
-		this.car = car;
+	public void setCarRegistration(String carRegistration) {
+		this.carRegistration = carRegistration;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public int getCustomerID() {
+		return customerID;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCustomerID(int customerID) {
+		this.customerID = customerID;
 	}
 
 	public double getElapsedDistance() {

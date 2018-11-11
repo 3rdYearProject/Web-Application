@@ -11,34 +11,34 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import model.Customer;
+import model.Journey;
 
 @ManagedBean
 @SessionScoped
-public class CustomerController {
+public class JourneyController {
 
-	private List<Customer> customers;
-	private CustomerDAO customerDAO;
+	private List<Journey> journeys;
+	private JourneyDAO journeyDAO;
 	
 	
-	public CustomerController() throws Exception {
-		customers = new ArrayList<>();
+	public JourneyController() throws Exception {
+		journeys = new ArrayList<>();
 		
-		customerDAO = CustomerDAO.getInstance();
+		journeyDAO = JourneyDAO.getInstance();
 	}
 	
-	public List<Customer> getCustomers() {
-		return customers;
+	public List<Journey> getJourneys() {
+		return journeys;
 	}
 	
 	/**
-	 * Method to get all Customers
+	 * Method to get all Journeys
 	 */
-	public void loadCustomers() {
-		customers.clear();
+	public void loadJourneys() {
+		journeys.clear();
 		try {
-			// get all customers from database
-			customers = customerDAO.getCustomers();
+			// get all journeys from DB
+			journeys = journeyDAO.getJourneys();
 		} catch (Exception exc) {
 			// add error message for JSF page
 			addErrorMessage(exc);
@@ -46,14 +46,14 @@ public class CustomerController {
 	}
 	
 	/**
-	 * Method to add a new Customer
-	 * @param newCustomer
+	 * Method to add a new Journey
+	 * @param newJourney
 	 * @return
 	 */
-	public String addCustomer(Customer newCustomer) {
+	public String addJourney(Journey journey) {
 		try {
-			// add customer to the database
-			customerDAO.addCustomer(newCustomer);
+			// add journey to the database
+			journeyDAO.addJourney(journey);
 
 		} catch (Exception exc) {
 			// add error message for JSF page
@@ -61,20 +61,20 @@ public class CustomerController {
 			return null;
 		}
 
-		return "customer-table?faces-redirect=true";
+		return "journey-table?faces-redirect=true";
 	}
 	
-	public String loadCustomer(int customerID) {
+	public String loadJourney(int journeyID) {
 		
 		try {
-			// get customer from DB
-			Customer customer = customerDAO.getCustomer(customerID);
+			// get journey from DB
+			Journey journey = journeyDAO.getJourney(journeyID);
 			
 			// request attributefor form page
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();		
 
 			Map<String, Object> requestMap = externalContext.getRequestMap();
-			requestMap.put("customer", customer);	
+			requestMap.put("journey", journey);	
 			
 		} catch (Exception exc) {
 			// add error message for JSF page
@@ -83,20 +83,20 @@ public class CustomerController {
 			return null;
 		}
 				
-		return "update-customer-form.xhtml";
+		return "update-journey-form.xhtml";
 	}	
 	
 	/**
-	 * Method to update Customer
-	 * @param customer Customer to update
+	 * Method to update Journey
+	 * @param journey Journey to update
 	 * @return
 	 */
-	public String updateCustomer(Customer customer) {
+	public String updateJourney(Journey journey) {
 
 		try {
 			
-			// update customer in the database
-			customerDAO.updateCustomer(customer);
+			// update journey in the database
+			journeyDAO.updateJourney(journey);
 			
 		} catch (Exception exc) {
 			// add error message for JSF page
@@ -105,25 +105,25 @@ public class CustomerController {
 			return null;
 		}
 		
-		return "customer_table?faces-redirect=true";		
+		return "journey_table?faces-redirect=true";		
 	}
 	
 	/**
-	 * Method to delete customer from DB
-	 * @param customerID id of customer to delete
-	 * @return customer_table
+	 * Method to delete journey from DB
+	 * @param journeyID id of journey to delete
+	 * @return journey_table
 	 */
-	public String deleteCustomer(int customerID) {
+	public String deleteJourney(int journeyID) {
 		try {
-			// delete customer from DB
-			customerDAO.deleteCustomer(customerID);
+			// delete journey from DB
+			journeyDAO.deleteJourney(journeyID);
 			
 		} catch (Exception exc) {
 			// add error message for JSF page
 			addErrorMessage(exc);
 			return null;
 		}
-		return "customer_table";	
+		return "journey_table";	
 	}	
 		
 	/**

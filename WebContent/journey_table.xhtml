@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:metadata>
+	<f:event type="preRenderView"
+		listener="#{journeyController.loadJourneys()}" />
+</f:metadata>
+
+<h:head>
+	<title>Journey Table</title>
+	<h:outputStylesheet library="css" name="customer_table.css" />
+</h:head>
+<h:body>
+	<div id="wrapper">
+		<div id="header">
+			<h2>Cabs</h2>
+		</div>
+	</div>
+
+	<div id="container">
+
+		<div id="content">
+
+			<h:button value="Add Journey" styleClass="add-customer-button"
+				outcome="journey_add" />
+
+			<h:form>
+
+				<h:dataTable value="#{journeyController.journeys}" var="tempJourney"
+					styleClass="demo-table" headerClass="demo-table-header"
+					rowClasses="demo-table-odd-row,demo-table-even-row">
+					<h:column>
+						<!-- column header  -->
+						<f:facet name="header">Journey ID</f:facet>
+						<!-- value of each row -->
+			#{tempJourney.journeyID}
+		</h:column>
+
+					<h:column>
+						<!-- column header  -->
+						<f:facet name="header">Car Registration</f:facet>
+						<!-- value of each row -->
+			#{tempJourney.carRegistration}
+		</h:column>
+
+					<h:column>
+						<!-- column header  -->
+						<f:facet name="header">Customer ID</f:facet>
+						<!-- value of each row -->
+			#{tempJourney.customerID}
+		</h:column>
+
+					<h:column>
+						<!-- column header  -->
+						<f:facet name="header">Elapsed Distance</f:facet>
+						<!-- value of each row -->
+			#{tempJourney.elapsedDistance}
+		</h:column>
+
+					<h:column>
+						<!-- column header  -->
+						<f:facet name="header">Total Distance</f:facet>
+						<!-- value of each row -->
+			#{tempJourney.totalDistance}
+		</h:column>
+
+					<h:column>
+						<!-- column header  -->
+						<f:facet name="header">Price</f:facet>
+						<!-- value of each row -->
+			#{tempJourney.price}
+		</h:column>
+
+					<h:column>
+						<!-- the column header -->
+						<f:facet name="header">Action</f:facet>
+						<!--  the value for each row -->
+						<h:commandLink value="Update"
+							action="#{journeyController.loadJourney(tempJourney.journeyID)}" /> |
+						<h:commandLink value="Delete"
+							onclick="if (!confirm('Are you sure you want to delete this journey?')) return false"
+							action="#{journeyController.deleteJourney(tempJourney.journeyID)}" />
+					</h:column>
+
+				</h:dataTable>
+			</h:form>
+		</div>
+	</div>
+
+	<br />
+	<br />
+	<h:form>
+		<h:commandButton value="Logout" action="#{login.logout}" />
+	</h:form>
+
+
+</h:body>
+</html>
