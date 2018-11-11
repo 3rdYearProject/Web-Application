@@ -23,6 +23,33 @@ public class Journey {
 	private double price;
 	
 	/**
+	 * Constructor with ID
+	 */
+	public Journey(String journeyID, Car car, Customer customer, double elapsedDistance, double totalDistance,
+			double price) {
+		this.journeyID = journeyID;
+		this.car = car;
+		this.customer = customer;
+		this.elapsedDistance = elapsedDistance;
+		this.totalDistance = totalDistance;
+		this.price = price;
+	}
+	
+	/**
+	 * Constructor without ID to operate with AutoIncrement SQL ID
+	 */
+	public Journey(Car car, Customer customer, double elapsedDistance, double totalDistance,
+			double price) {
+		this.car = car;
+		this.customer = customer;
+		this.elapsedDistance = elapsedDistance;
+		this.totalDistance = totalDistance;
+		this.price = price;
+	}
+	
+	
+
+	/**
 	 * Required No Parameter Constructor 
 	 */
 	public Journey() {

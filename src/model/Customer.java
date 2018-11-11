@@ -20,13 +20,16 @@ public class Customer {
 	/**
 	 * Attributes
 	 */
+	private int customerID;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private int phoneNumber;
 	private int cardNumber;
 	
-	
+	/**
+	 * Constructor without ID to operate with AutoIncrement SQL ID
+	 */
 	public Customer(String firstName,String lastName, String email, int phoneNumber, int cardNumber) {
 		
 		this.firstName = firstName;
@@ -36,6 +39,21 @@ public class Customer {
 		this.cardNumber = cardNumber;
 		
 	}
+	
+	/**
+	 * Constructor with ID
+	 */
+	public Customer(int customerID, String firstName,String lastName, String email, int phoneNumber, int cardNumber) {
+		this.customerID = customerID;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.cardNumber = cardNumber;
+		
+	}
+	
+		
 
 	/**
 	 * Required No Parameter Constructor 
@@ -86,8 +104,14 @@ public class Customer {
 	public void setCardNumber(int cardNumber) {
 		this.cardNumber = cardNumber;
 	}
-
 	
+	public int getCustomerID() {
+		return customerID;
+	}
+
+	public void setCustomerID(int customerID) {
+		this.customerID = customerID;
+	}
 
 	@Override
 	public String toString() {
