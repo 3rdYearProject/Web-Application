@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>Update Customer</title>
+	
+	<h:outputStylesheet library="css" name="style.css"  />
+	<h:outputStylesheet library="css" name="add-customer-style.css"  />
+	
+</h:head>
+
+<h:body>
+
+	<div id="wrapper">
+		<div id="header">
+			<h2>Cabs</h2>
+		</div>
+	</div>
+	
+	<div id="container">
+		<h3>Update Journey</h3>
+
+		<h:messages globalOnly="true" />
+
+		<h:form id="form" style="margin-top: 10px;" >
+			<h:panelGrid columns="3">
+			
+				<h:outputLabel>Car Registration:</h:outputLabel> <h:inputText value="#{journey.carRegistration}" id="carRegistration" /> <h:message for="carRegistration" />
+	
+				<h:outputLabel>Customer ID:</h:outputLabel> <h:inputText value="#{journey.customerID}" id="customerID" /> <h:message for="customerID" />
+	
+				<h:outputLabel>Elapsed Distance:</h:outputLabel> <h:inputText value="#{journey.elapsedDistance}" id="elapsedDistance" /> <h:message for="elapsedDistance" />
+            	
+				<h:outputLabel>Total Distance number:</h:outputLabel> <h:inputText value="#{journey.totalDistance}" id="totalDistance" /> <h:message for="totalDistance" />
+				
+				<h:outputLabel>Price:</h:outputLabel> <h:inputText value="#{journey.price}" id="price" /> <h:message for="price" />
+				
+				 <h:inputHidden value="#{journey.journeyID}" />
+				
+				 <h:commandButton value="Save" styleClass="save" action="#{journeyController.updateJourney(journey)}"/>
+			
+			</h:panelGrid>
+		</h:form>
+
+		<div style="clear: both;"></div>
+
+		<p><h:outputLink value="journey_table.xhtml">Back to List</h:outputLink></p>
+
+	</div>	
+</h:body>
+</html>
